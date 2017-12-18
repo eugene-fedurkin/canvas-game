@@ -1,6 +1,6 @@
 const levels = [
     {
-        background: './imgs/backgrounds/background-game.png',
+        background: './imgs/backgrounds/game.png',
         groundLevelY: 640,
         enemies: [
             {
@@ -18,7 +18,7 @@ const levels = [
         ]
     },
     {
-        background: './imgs/backgrounds/background-game.png',
+        background: './imgs/backgrounds/game.png',
         groundLevelY: 640,
         enemies: [
             {
@@ -32,7 +32,7 @@ const levels = [
         ]
     },
     {
-        background: './imgs/backgrounds/background-game.png',
+        background: './imgs/backgrounds/game.png',
         groundLevelY: 640,
         enemies: [
             {
@@ -49,7 +49,7 @@ const levels = [
         ]
     },
     {
-        background: './imgs/backgrounds/background-game.png',
+        background: './imgs/backgrounds/game.png',
         groundLevelY: 640,
         enemies: [
             {
@@ -69,7 +69,7 @@ const levels = [
         ]
     },
     {
-        background: './imgs/backgrounds/background-game.png',
+        background: './imgs/backgrounds/game.png',
         groundLevelY: 640,
         enemies: [
             {
@@ -95,7 +95,7 @@ const levels = [
         ]
     },
     {
-        background: './imgs/backgrounds/background-game.png',
+        background: './imgs/backgrounds/game.png',
         groundLevelY: 640,
         enemies: [
             {

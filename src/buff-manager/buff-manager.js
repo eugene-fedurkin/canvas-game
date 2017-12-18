@@ -154,7 +154,7 @@ export default class BuffManager {
     getParametersOfBuffButton() {
         return [
             {
-                name: 'arm', iconUrl: 'imgs/buff-icon/arm.png',
+                name: 'arm', iconUrl: 'imgs/buff-icon/weapon.png',
                 x: 20, y: 90, width: 30, height: 40,
                 clickHandler: () => this.improveWeapon()
             },

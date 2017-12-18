@@ -107,7 +107,7 @@ export default class Unit {
                     positionY: state.currentLevel.enemies[0].y,
                     action: Actions.attack,
                 });
-                state.instance.state.scenes.statistic.yourDamage++;
+                state.instance.state.scenes.statistic.totalDamage++;
             } else {
                 state.currentLevel.allies[0].health -= this.damage;
 

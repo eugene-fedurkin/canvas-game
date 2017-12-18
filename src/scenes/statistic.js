@@ -11,8 +11,8 @@ export default class StatisticScene extends SceneBase { // TODO: rename
 
     updateState(timestamp) {
         const state = this.state.scenes.statistic;
-        if (!state.spentTime) {
-            state.spentTime = (timestamp / 60000).toFixed();
+        if (!state.timeSpent) {
+            state.timeSpent = (timestamp / 60000).toFixed();
         }
     }
 
@@ -23,11 +23,11 @@ export default class StatisticScene extends SceneBase { // TODO: rename
 
         this.gameCanvas.context.fillText('Statistics', 480, 100);
         this.gameCanvas.context.fillText('Time spent', 180, 200);
-        this.gameCanvas.context.fillText(`${state.spentTime} minutes`, 750, 200);
+        this.gameCanvas.context.fillText(`${state.timeSpent} minutes`, 750, 200);
         this.gameCanvas.context.fillText('Levels failed', 180, 250);
-        this.gameCanvas.context.fillText(`${state.unsuccessfulAttempts} levels`, 750, 250);
+        this.gameCanvas.context.fillText(`${state.levelsFailed} levels`, 750, 250);
         this.gameCanvas.context.fillText('Total damage', 180, 300);
-        this.gameCanvas.context.fillText(`${state.yourDamage} dmg`, 750, 300);
+        this.gameCanvas.context.fillText(`${state.totalDamage} dmg`, 750, 300);
         this.gameCanvas.context.fillText('Total received damage', 180, 350);
         this.gameCanvas.context.fillText(`${state.receivedDamage} dmg`, 750, 350);
         this.gameCanvas.context.fillText('Money earned', 180, 400);
@@ -40,7 +40,7 @@ export default class StatisticScene extends SceneBase { // TODO: rename
 
     initialize() {
         this.background = new Image();
-        this.background.src = './imgs/backgrounds/background-statistic.jpg';
+        this.background.src = './imgs/backgrounds/statistic.jpg';
         this.state.scenes.statistic.background = this.background;
 
         this.exitButton = new Button({

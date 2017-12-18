@@ -117,7 +117,7 @@ export class GameScene extends SceneBase {
           this.gameCanvas.unsubscribeClick();
           this.initialize(state.currentLevel.levelNumber - 1);
           this.subscribeButtonsClick();
-          this.state.scenes.statistic.unsuccessfulAttempts++;
+          this.state.scenes.statistic.levelsFailed++;
           state.money = state.pastMoney;
         }
       });
@@ -136,7 +136,7 @@ export class GameScene extends SceneBase {
           this.gameCanvas.unsubscribeClick();
           this.initialize(state.currentLevel.levelNumber);
           this.subscribeButtonsClick();
-          this.state.scenes.statistic.unsuccessfulAttempts++;
+          this.state.scenes.statistic.levelsFailed++;
           state.money = state.pastMoney;
 
         }

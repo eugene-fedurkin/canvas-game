@@ -47,9 +47,9 @@ export class State {
             statistic: {
                 instance: null,
                 background: null,
-                spentTime: 0,
-                unsuccessfulAttempts: 0,
-                yourDamage: 0,
+                timeSpent: 0,
+                levelsFailed: 0,
+                totalDamage: 0,
                 receivedDamage: 0,
                 earnedMoney: defaults.startMoney,
                 healedHp: 0
