@@ -1,0 +1,11 @@
+canvas {
+    display: block;
+    margin: 0 auto;
+}
+
+@font-face {
+    font-family: 'Pixelate';
+    src: url('./font/SFPixelate.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
