@@ -3,7 +3,7 @@ import { State } from './state/state';
 import { MenuScene } from './scenes/menu.scene';
 import { GameScene } from './scenes/game.scene';
 import Music from './music/music';
-import Statistic from './scenes/statistic';
+import StatisticScene from './scenes/statistic';
 
 window.onload = function() {
     const state = new State();
@@ -12,12 +12,12 @@ window.onload = function() {
     // const preloder = new Preloader(state, gameCanvas);
     const menuScene = new MenuScene(state, gameCanvas, music);
     const gameScene = new GameScene(state, gameCanvas, music);
-    const statistic = new Statistic(state, gameCanvas, music);
+    const statisticScene = new StatisticScene(state, gameCanvas, music);
 
     // state.scenes.menu.instance = preloder;
     state.scenes.menu.instance = menuScene;
     state.scenes.game.instance = gameScene;
-    state.scenes.statistic.instance = statistic;
+    state.scenes.statistic.instance = statisticScene;
     state.currentScene = menuScene;
 
     (function frame(timestamp) {
