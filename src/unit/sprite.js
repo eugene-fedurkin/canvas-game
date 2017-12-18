@@ -14,7 +14,7 @@ export default class Sprite {
     this.bodyXOffset = options.bodyXOffset;
     
     this.preloader = options.preloader;
-    if (this.preloder) this.preloader.load(this.image);
+    // if (this.preloder) this.preloader.load(this.image);
     // Y offset
     
     this.currentTick = 0;

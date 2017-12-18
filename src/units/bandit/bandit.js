@@ -51,8 +51,8 @@ export default class Bandit extends Unit {
             url: `imgs/units/bandit/bandit-death-${this.direction}.png`,
             frameWidth: 30,
             frameHeight: 25,
-            numberOfFrames: 12,
-            timeToFrame: 200,
+            numberOfFrames: 6,
+            timeToFrame: 400,
             bodyXOffset: this.playersUnit ? 19 : 11
         });
     }

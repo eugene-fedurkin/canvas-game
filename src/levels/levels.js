@@ -4,10 +4,16 @@ const levels = [
         groundLevelY: 640,
         enemies: [
             {
-                name: 'skeleton'
+                name: 'bandit'
             },
             {
-                name: 'skeleton'
+                name: 'bandit'
+            },
+            {
+                name: 'bandit'
+            },
+            {
+                name: 'bandit'
             }
         ]
     },

@@ -3,10 +3,8 @@ import Button from "../controls/button";
 import Sprite from "../unit/sprite";
 
 export class MenuScene extends SceneBase {
-  constructor(state, gameCanvas, music, preloader) {
+  constructor(state, gameCanvas, music) {
     super(state, gameCanvas, music);
-
-    this.preloder = preloader;
 
     this.state.backgroundSprite = new Sprite({
       url: 'imgs/UI/menu.png',
@@ -27,13 +25,6 @@ export class MenuScene extends SceneBase {
 
     this.state.scenes.menu.aboutSheet = new Image();
     this.state.scenes.menu.aboutSheet.src = 'imgs/UI/about-sheet.png';
-
-    this.preloder.load(
-      this.state.scenes.menu.cloudsImage,
-      this.state.scenes.menu.belt,
-      this.state.scenes.menu.menuSheet,
-      this.state.scenes.menu.aboutSheet
-    );
 
     this.buttons = this.getButtonsConfig().map(options => new Button(options));
     this.gameCanvas.subscribeOnClick(...this.buttons);

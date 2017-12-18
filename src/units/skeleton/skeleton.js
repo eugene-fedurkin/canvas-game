@@ -31,7 +31,7 @@ export default class Skeleton extends Unit {
 
         this.sprites.walk = new Sprite({
             url: `imgs/units/skeleton/skeleton-walk-${this.direction}.png`,
-            frameWidth: 22,
+            frameWidth: 24,
             frameHeight: 33,
             numberOfFrames: 13,
             timeToFrame: 90,
