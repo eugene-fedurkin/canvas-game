@@ -5,8 +5,8 @@ export default class Skeleton extends Unit {
     constructor(id, direction) {
         super({
             id: id,
-            health: 10,
-            damage: 3,
+            health: 8,
+            damage: 2,
             attackTime: 2142,
             rangeAttack: 23,
             timeToHit: 952,

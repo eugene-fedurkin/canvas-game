@@ -12,6 +12,7 @@ export class GameCanvas {
 
         document.body.appendChild(this.canvas);
         this.canvas.addEventListener('click', () => this.executeClickHandlers());
+        this.canvas.addEventListener('mousemove', () => this.changeMouse());
     }
 
     subscribeOnClick(...subscribers) {
@@ -42,5 +43,19 @@ export class GameCanvas {
 
             if (clickedInsideSubscriber) subscriber.clickHandler();
         });
+    }
+
+    changeMouse() {
+        const x = event.clientX - this.canvas.getBoundingClientRect().left;
+        const y = event.clientY - this.canvas.getBoundingClientRect().top;
+        const isHover = this.clickSubscribers.some(subscriber => {
+            return subscriber.x <= x
+                && subscriber.x + subscriber.width >= x
+                && subscriber.y <= y 
+                && subscriber.y + subscriber.height >= y;
+        });
+
+        if (isHover) document.getElementById('canvas').style.cursor = 'url("imgs/UI/cursor.png"), auto';
+        else document.getElementById('canvas').style.cursor = 'default';
     }
 }

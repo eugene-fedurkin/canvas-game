@@ -2,7 +2,7 @@ import { SceneBase } from "./scene.base";
 import Dialog from '../dialog/dialog';
 import Button from '../controls/button';
 
-export default class StatisticScene extends SceneBase { // TODO: rename
+export default class StatisticScene extends SceneBase {
     constructor(state, gameCanvas, music) {
         super(state, gameCanvas, music);
         this.dialog = new Dialog(gameCanvas.context);

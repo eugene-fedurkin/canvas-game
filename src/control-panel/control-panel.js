@@ -1,5 +1,6 @@
 import Button from '../controls/button';
 import parametersOfUnitButtons from './parameters-unit-buttons';
+import demoParametersOfUnitButtons from './demo-parameters-unit-buttons.js';
 import UnitFactory from '../unit-factory/unit-factory';
 import Queue from '../queue/queue';
 import Direction from '../unit/direction';
@@ -14,9 +15,11 @@ export default class ControlPanel {
         this.queue = new Queue(state);
     }
 
-    createControlPanel(level) {
-        level = level > 4 ? 4 : level; // TODO: ???
-        this.buttons = parametersOfUnitButtons[level].map(buttonParam => {
+    createControlPanel(level, isDemo) {
+        const parmeters = isDemo 
+            ? demoParametersOfUnitButtons
+            : parametersOfUnitButtons;
+        this.buttons = parmeters[level].map(buttonParam => {
             const button = new Button({
                 x: buttonParam.x,
                 y: buttonParam.y,

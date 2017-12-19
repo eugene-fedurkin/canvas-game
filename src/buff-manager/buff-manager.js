@@ -25,7 +25,7 @@ export default class BuffManager {
         });
     }
 
-    improveWeapon() { // TODO: problem with multyBuff
+    improveWeapon() {
         if (this.state.scenes.game.money >= 3) {
             this.state.scenes.game.currentLevel.allies.forEach(unit => {
                 unit.damage++;
@@ -127,7 +127,7 @@ export default class BuffManager {
     render() {
         this.buttons.forEach(button => button.render(this.gameCanvas.context));
         this.gameCanvas.context.save();
-        this.gameCanvas.context.font = '22px Pixelate';
+        this.gameCanvas.context.font = '18px Pixelate';
         this.gameCanvas.context.fillText('$3', 50, 140);
         this.gameCanvas.context.fillText('$5', 50, 210);
         this.gameCanvas.context.restore();
@@ -155,12 +155,12 @@ export default class BuffManager {
         return [
             {
                 name: 'arm', iconUrl: 'imgs/buff-icon/weapon.png',
-                x: 20, y: 90, width: 30, height: 40,
+                x: 20, y: 90, width: 40, height: 40,
                 clickHandler: () => this.improveWeapon()
             },
             {
                 name: 'armor', iconUrl: 'imgs/buff-icon/armor.png',
-                x: 20, y: 160, width: 30, height: 40,
+                x: 20, y: 160, width: 40, height: 40,
                 clickHandler: () => this.improveArmor()
             }
         ];

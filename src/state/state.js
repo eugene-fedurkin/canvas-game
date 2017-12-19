@@ -1,16 +1,13 @@
-import levels from '../levels/levels';
+// import levels from '../levels/levels';
 import UnitFactory from '../unit-factory/unit-factory';
 import Queue from '../queue/queue';
 import defaults from './constants';
 
 export class State {
     constructor() {
-        // this.isPaused = false;
+        this.isPaused = false;
         this.currentScene = null;
         this.scenes = {
-            preloader: {
-                instance: null,
-            },
             menu: {
                 instance: null,
                 backgroundSprite: null,
@@ -33,9 +30,10 @@ export class State {
                 enemiesSpawnX: defaults.enemiesSpawnX,
                 alliesSpawnX: defaults.alliesSpawnX,
                 isPauseGame: null,
-                money: defaults.startMoney,
-                pastMoney: defaults.startMoney,
-                numberOfLevels: levels.length,
+                isDemo: null,
+                money: null,
+                pastMoney: null,
+                numberOfLevels: null,
                 currentLevel: {
                     levelNumber: null,
                     background: null,
@@ -55,13 +53,16 @@ export class State {
                 healedHp: 0
             }
         };
-
-        // this.unitFactory = UnitFactory.getSingletonInstance();
-        // this.queue = new Queue(this); // TODO: move
     }
 
     reset() {
         this.scenes.game.money = defaults.startMoney;
         this.scenes.game.pastMoney = defaults.startMoney;
+        this.scenes.statistic.timeSpent = 0;
+        this.scenes.statistic.levelsFailed = 0;
+        this.scenes.statistic.totalDamage = 0;
+        this.scenes.statistic.receivedDamage = 0;
+        this.scenes.statistic.earnedMoney = defaults.startMoney;
+        this.scenes.statistic.healedHp = 0;
     }
 }

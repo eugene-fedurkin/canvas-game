@@ -18,11 +18,6 @@ export default class Unit {
         this.deathTime = unitInfo.deathTime;
         this.stepSize = unitInfo.stepSize;
         this.direction = unitInfo.direction;
-        this.render = { // TODO: mb useless
-            width: unitInfo.width,
-            height: unitInfo.height,
-            fullWidth: unitInfo.fullWidth
-        };
 
         this.sprites = new Sprites();
         this.floatingText = FloatingText.getSingletonInstance();
@@ -99,7 +94,7 @@ export default class Unit {
                 state.currentLevel.enemies[0].health -= this.damage;
 
                 const positionX = state.currentLevel.enemies[0].x 
-                    + state.currentLevel.enemies[0].getCurrentSprite().bodyXOffset;
+                    + state.currentLevel.enemies[0].sprites.walk.bodyXOffset;
 
                 this.floatingText.add({
                     text: this.damage,
@@ -112,8 +107,7 @@ export default class Unit {
                 state.currentLevel.allies[0].health -= this.damage;
 
                 const positionX = state.currentLevel.allies[0].x 
-                    + state.currentLevel.allies[0].getCurrentSprite().bodyXOffset
-                    + state.currentLevel.allies[0].getCurrentSprite().xOffset;
+                    + state.currentLevel.allies[0].sprites.walk.bodyXOffset;
 
                 this.floatingText.add({
                     text: this.damage,
@@ -142,7 +136,7 @@ export default class Unit {
             } else {
                 const bonusMoney = Math.floor(state.currentLevel.enemies[0].cost / 2);
                 const positionX = state.currentLevel.enemies[0].x 
-                + state.currentLevel.allies[0].getCurrentSprite().frameWidth / 2;
+                + state.currentLevel.allies[0].sprites.walk.bodyXOffset;
 
                 state.money += bonusMoney;
 
@@ -176,11 +170,6 @@ export default class Unit {
         if (this.playersUnit) return state.currentLevel.enemies[0].health <= 0;
         else return state.currentLevel.allies[0].health <= 0;
     }
-
-    // getCenterOfBody() {
-    //     return this.
-    //     this.x + this.getCurrentSprite().frameWidth + this.getCurrentSprite().attackXOffset
-    // }
 
     isInFrontOfAlly(state) {
         if (this.playersUnit) {

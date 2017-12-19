@@ -24,7 +24,7 @@ export default class FloatingText {
     }
 
     render() {
-        this.state.forEach(textParam => { // TODO: damage need to rename
+        this.state.forEach(textParam => {
             this.context.save();
             this.context.font ='14px Pixelate';
             if (textParam.action === Actions.attack) {

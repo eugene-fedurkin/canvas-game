@@ -94,6 +94,18 @@ export class MenuScene extends SceneBase {
     this.gameCanvas.unsubscribeClick();
     this.state.currentScene = this.state.scenes.game.instance;
     this.state.reset(); // TODO: mb rename resetMoney
+    this.state.scenes.game.isDemo = false;
+    this.state.currentScene.initialize(0);
+    this.state.currentScene.subscribeButtonsClick();
+    this.state.currentScene.dialog.open(`Select a unit in the upper right corner`, 200, []);
+  }
+  
+  startDemoGame() {
+    this.gameCanvas.unsubscribeClick();
+    this.state.currentScene = this.state.scenes.game.instance;
+    this.state.reset(); // TODO: mb rename resetMoney
+    this.state.scenes.game.isDemo = true;
+    this.state.currentScene.initialize(0);
     this.state.currentScene.subscribeButtonsClick();
     this.state.currentScene.dialog.open(`Select a unit in the upper right corner`, 200, []);
   }
@@ -105,8 +117,9 @@ export class MenuScene extends SceneBase {
 
   getButtonsConfig() {
     return [
-      { x: 75, y: 420, height: 50, width: 165, clickHandler: () => this.startGame() },
-      { x: 65, y: 490, height: 50, width: 185, clickHandler: () => this.toggleAbout() }
+      { x: 75, y: 400, height: 45, width: 165, clickHandler: () => this.startGame() },
+      { x: 75, y: 455, height: 45, width: 165, clickHandler: () => this.startDemoGame() },
+      { x: 65, y: 515, height: 45, width: 185, clickHandler: () => this.toggleAbout() }
     ];
   }
 }

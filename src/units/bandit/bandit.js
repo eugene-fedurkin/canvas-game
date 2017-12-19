@@ -5,7 +5,7 @@ export default class Bandit extends Unit {
     constructor(id, direction) {
         super({
             id: id,
-            health: 6,
+            health: 7,
             damage: 2,
             attackTime: 600,
             rangeAttack: 15,
@@ -15,7 +15,7 @@ export default class Bandit extends Unit {
             direction: direction,
             idleTime: 1000
         });
-        this.cost = 2;
+        this.cost = 3;
         this.configureSprites();
     }
 

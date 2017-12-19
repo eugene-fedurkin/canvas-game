@@ -15,9 +15,10 @@ export default class Rogue extends Unit {
             direction: direction,
             idleTime: 1000
         });
-        this.cost = 2;
+        this.cost = 3;
         this.configureSprites();
     }
+
     configureSprites() {
         this.sprites.idle = new Sprite({
             url: `imgs/units/rogue/rogue-idle-${this.direction}.png`,
@@ -51,7 +52,7 @@ export default class Rogue extends Unit {
             frameWidth: 33,
             frameHeight: 21,
             numberOfFrames: 9,
-            timeToFrame: 50,
+            timeToFrame: 130,
             bodyXOffset: this.playersUnit ? 13 : 7
         });
     }

@@ -3,118 +3,81 @@ const levels = [
         background: './imgs/backgrounds/game.png',
         groundLevelY: 640,
         enemies: [
-            {
-                name: 'bandit'
-            },
-            {
-                name: 'bandit'
-            },
-            {
-                name: 'bandit'
-            },
-            {
-                name: 'bandit'
-            }
+            { name: 'skeleton' },
+            { name: 'skeleton' }
         ]
     },
     {
         background: './imgs/backgrounds/game.png',
         groundLevelY: 640,
         enemies: [
-            {
-                name: 'skeleton'
-            },
-            {
-                name: 'blob'
-            }
-        ],
-        allies: [
+            { name: 'skeleton' },
+            { name: 'country-knight' }
         ]
     },
     {
         background: './imgs/backgrounds/game.png',
         groundLevelY: 640,
         enemies: [
-            {
-                name: 'skeleton'
-            },
-            {
-                name: 'skeleton'
-            },
-            {
-                name: 'country-knight'
-            }
-        ],
-        allies: [
+            { name: 'country-knight' },
+            { name: 'bandit' },
+            { name: 'skeleton' },
+            { name: 'knight' },
+            { name: 'wizard' },
         ]
     },
     {
         background: './imgs/backgrounds/game.png',
         groundLevelY: 640,
         enemies: [
-            {
-                name: 'skeleton'
-            },
-            {
-                name: 'skeleton'
-            },
-            {
-                name: 'country-knight'
-            },
-            {
-                name: 'blob'
-            }
-        ],
-        allies: [
+            { name: 'skeleton' },
+            { name: 'bandit' },
+            { name: 'wizard' },
+            { name: 'wizard' },
+            { name: 'skeleton' },
+            { name: 'skeleton' },
+            { name: 'rogue' },
+            { name: 'knight' }
         ]
     },
     {
         background: './imgs/backgrounds/game.png',
         groundLevelY: 640,
         enemies: [
-            {
-                name: 'knight'
-            },
-            {
-                name: 'skeleton'
-            },
-            {
-                name: 'blob'
-            },
-            {
-                name: 'skeleton'
-            },
-            {
-                name: 'country-knight'
-            },
-            {
-                name: 'blob'
-            }
-        ],
-        allies: [
+            { name: 'knight' },
+            { name: 'knight' },
+            { name: 'rogue' },
+            { name: 'wizard' },
+            { name: 'wizard' },
+            { name: 'country-knight' },
+            { name: 'skeleton' },
+            { name: 'skeleton' },
+            { name: 'blob' },
+            { name: 'skeleton' },
         ]
     },
     {
         background: './imgs/backgrounds/game.png',
         groundLevelY: 640,
         enemies: [
-            {
-                name: 'skeleton'
-            },
-            {
-                name: 'blob'
-            },
-            {
-                name: 'knight'
-            },
-            {
-                name: 'blob'
-            },
-            {
-                name: 'knight'
-            },
-        ],
-        allies: [
+            { name: 'skeleton' },
+            { name: 'skeleton' },
+            { name: 'bandit' },
+            { name: 'skeleton' },
+            { name: 'rogue' },
+            { name: 'wizard' },
+            { name: 'knight' },
+            { name: 'country-knight' },
+            { name: 'blob' },
+            { name: 'knight' },
+            { name: 'bandit' },
+            { name: 'knight' },
+            { name: 'rogue' },
+            { name: 'country-knight' },
+            { name: 'bandit' },
+            { name: 'knight' },
+            { name: 'wizard' },
+            { name: 'skeleton' },
         ]
     }
 ];

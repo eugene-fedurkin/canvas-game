@@ -18,6 +18,7 @@ export default class Wizard extends Unit {
             idleTime: 1000
         });
         this.healthToHeal = 1;
+        this.healRange = 120;
         this.cost = 3;
         this.configureSprites();
     }
@@ -75,7 +76,7 @@ export default class Wizard extends Unit {
         } else if (this.currentAction === Actions.idle
             && timestamp - this.previousActionTimestamp < this.idleTime) {
             return;
-        } else if (this.isInFrontOfAlly(state) && this.isUnitRange(state)) {
+        } else if (this.isInFrontOfAlly(state) && this.isUnitRange(state) && !state.isPauseGame) {
             this.heal(state, timestamp);
         } else if (this.isInFrontOfAlly(state) || state.isPauseGame
             || this.isInFrontOfEnemy(state) && this.isEnemyDying(state)) {
@@ -94,6 +95,7 @@ export default class Wizard extends Unit {
             this.sprites.heal.reset();
             this.updateY(state);
         }
+
         const healTime = this.attackTime;
         const targetUnit = this.playersUnit ? state.currentLevel.allies[0]
             : state.currentLevel.enemies[0];
@@ -103,7 +105,7 @@ export default class Wizard extends Unit {
             targetUnit.health += this.healthToHeal;
 
             const positionX = targetUnit.x 
-                + targetUnit.getCurrentSprite().frameWidth / 2;
+                + targetUnit.sprites.walk.bodyXOffset;
             this.floatingText.add({
                 text: this.healthToHeal,
                 positionX: positionX,
@@ -123,7 +125,7 @@ export default class Wizard extends Unit {
         const targetUnit = this.playersUnit ? state.currentLevel.allies[0]
             : state.currentLevel.enemies[0];
 
-        return Math.abs(this.x - targetUnit.x) < 120;
+        return Math.abs(this.x - targetUnit.x) < this.healRange;
     }
 
     getCurrentSprite() {
