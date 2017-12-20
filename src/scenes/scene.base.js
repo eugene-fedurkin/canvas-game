@@ -1,9 +1,8 @@
-export class SceneBase {
-  constructor(state, gameCanvas, music, preloder) {
+export default class SceneBase {
+  constructor(state, gameCanvas, music) {
     this.state = state;
     this.gameCanvas = gameCanvas;
     this.music = music;
-    this.preloder = preloder;
   }
 
   frame(timestamp) {

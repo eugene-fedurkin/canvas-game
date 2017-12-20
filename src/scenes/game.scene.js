@@ -1,4 +1,4 @@
-import { SceneBase } from "./scene.base";
+import SceneBase from './scene.base';
 import ControlPanel from '../control-panel/control-panel';
 import Dialog from '../dialog/dialog';
 import UnitFactory from '../unit-factory/unit-factory';
@@ -10,7 +10,7 @@ import Button from '../controls/button';
 import FloatingText from '../floating-text/floating-text';
 import BuffManager from '../buff-manager/buff-manager';
 
-export class GameScene extends SceneBase {
+export default class GameScene extends SceneBase {
   constructor(state, gameCanvas, music) {
     super(state, gameCanvas, music);
 
@@ -24,12 +24,14 @@ export class GameScene extends SceneBase {
   }
 
   updateState(timestamp) {
-    this.state.scenes.game.currentLevel.allies.forEach(ally => ally.doAction(this.state.scenes.game, timestamp));
-    this.state.scenes.game.currentLevel.enemies.forEach(enemy => enemy.doAction(this.state.scenes.game, timestamp));
+    this.state.scenes.game.currentLevel.allies
+      .forEach(ally => ally.doAction(this.state.scenes.game, timestamp));
+    this.state.scenes.game.currentLevel.enemies
+      .forEach(enemy => enemy.doAction(this.state.scenes.game, timestamp));
 
     const winner = this.getWinner();
     if (winner && !this.state.scenes.game.isPauseGame) {
-        this.showEndGameWindow(winner);
+      this.showEndGameWindow(winner);
     }
 
     this.buffManager.updateTime();
@@ -45,22 +47,30 @@ export class GameScene extends SceneBase {
 
     this.buffManager.render();
 
-    gameState.currentLevel.allies.forEach(ally => {
+    gameState.currentLevel.allies.forEach((ally) => {
       const sprite = ally.getCurrentSprite();
+
       sprite.tick(timestamp, this.prevTimeStamp);
-      this.gameCanvas.context.drawImage(sprite.image, sprite.getFrameX(), 0,
-          sprite.frameWidth - 1, sprite.frameHeight,
-          ally.x + sprite.xOffset, ally.y, sprite.frameWidth, sprite.frameHeight);
+
+      this.gameCanvas.context.drawImage(
+        sprite.image, sprite.getFrameX(), 0, sprite.frameWidth - 1,
+        sprite.frameHeight, ally.x + sprite.xOffset,
+        ally.y, sprite.frameWidth, sprite.frameHeight,
+      );
     });
 
-    gameState.currentLevel.enemies.forEach(enemy => {
+    gameState.currentLevel.enemies.forEach((enemy) => {
       const sprite = enemy.getCurrentSprite();
-      const frameX = (sprite.frameWidth * (sprite.numberOfFrames -1))
+      const frameX = (sprite.frameWidth * (sprite.numberOfFrames - 1))
           - sprite.getFrameX();
+
       sprite.tick(timestamp, this.prevTimeStamp);
-      this.gameCanvas.context.drawImage(sprite.image, frameX, 0,
-          sprite.frameWidth, sprite.frameHeight,
-          enemy.x + sprite.xOffset, enemy.y, sprite.frameWidth, sprite.frameHeight);
+
+      this.gameCanvas.context.drawImage(
+        sprite.image, frameX, 0, sprite.frameWidth,
+        sprite.frameHeight, enemy.x + sprite.xOffset,
+        enemy.y, sprite.frameWidth, sprite.frameHeight,
+      );
     });
 
     this.floatingText.render();
@@ -77,8 +87,7 @@ export class GameScene extends SceneBase {
   }
 
   initialize(level) {
-    const state = this.state.scenes.game;
-    const isDemo = state.isDemo;
+    const [state, isDemo] = [this.state.scenes.game, this.state.scenes.game.isDemo];
 
     state.isPauseGame = true;
     state.numberOfLevels = isDemo ? demoLevels.length : levels.length;
@@ -95,14 +104,13 @@ export class GameScene extends SceneBase {
         width: 61,
         iconUrl: 'imgs/UI/next-button.png',
         clickHandler: () => {
-          console.log('play')
           this.dialog.close();
           this.buffManager.fullReset();
           this.gameCanvas.unsubscribeClick();
           this.initialize(state.currentLevel.levelNumber + 1, isDemo);
           this.subscribeButtonsClick();
           state.pastMoney = state.money;
-        }
+        },
       });
     }
     if (!this.prevButton) {
@@ -113,7 +121,6 @@ export class GameScene extends SceneBase {
         width: 55,
         iconUrl: 'imgs/UI/prev-button.png',
         clickHandler: () => {
-          console.log('prev')
           this.dialog.close();
           this.buffManager.fullReset();
           this.gameCanvas.unsubscribeClick();
@@ -121,9 +128,9 @@ export class GameScene extends SceneBase {
           this.subscribeButtonsClick();
           this.state.scenes.statistic.levelsFailed++;
           state.money = state.pastMoney;
-        }
+        },
       });
-    } 
+    }
     if (!this.replayButton) {
       this.replayButton = new Button({
         x: 650,
@@ -132,7 +139,6 @@ export class GameScene extends SceneBase {
         width: 55,
         iconUrl: 'imgs/UI/replay.png',
         clickHandler: () => {
-          console.log('replay')
           this.dialog.close();
           this.buffManager.fullReset();
           this.gameCanvas.unsubscribeClick();
@@ -140,8 +146,7 @@ export class GameScene extends SceneBase {
           this.subscribeButtonsClick();
           this.state.scenes.statistic.levelsFailed++;
           state.money = state.pastMoney;
-
-        }
+        },
       });
     }
     if (!this.exitButton) {
@@ -152,14 +157,13 @@ export class GameScene extends SceneBase {
         width: 61,
         iconUrl: 'imgs/UI/exit.png',
         clickHandler: () => {
-          console.log('exit');
           this.dialog.reset();
           this.buffManager.fullReset();
           this.gameCanvas.unsubscribeClick();
           this.state.currentScene = this.state.scenes.menu.instance;
           this.music.subscribe();
           this.gameCanvas.subscribeOnClick(...this.state.currentScene.buttons);
-        }
+        },
       });
     }
     if (!this.closeButton) {
@@ -170,13 +174,12 @@ export class GameScene extends SceneBase {
         width: 61,
         iconUrl: 'imgs/UI/close.png',
         clickHandler: () => {
-          console.log('close');
           this.dialog.close();
           this.gameCanvas.unsubscribeClick();
           this.subscribeButtonsClick();
 
           state.isPauseGame = false;
-        }
+        },
       });
     }
     if (!this.pauseMenuButton) {
@@ -187,7 +190,6 @@ export class GameScene extends SceneBase {
         width: 61,
         iconUrl: 'imgs/UI/help-menu.png',
         clickHandler: () => {
-          console.log('help-menu');
           this.gameCanvas.unsubscribeClick();
           state.isPauseGame = true;
           this.dialog.reset();
@@ -199,9 +201,14 @@ export class GameScene extends SceneBase {
             this.gameCanvas.subscribeOnClick(this.closeButton, this.exitButton, this.replayButton);
           } else {
             this.dialog.open('What do you want to do', 350, [this.closeButton, this.exitButton, this.prevButton, this.replayButton]);
-            this.gameCanvas.subscribeOnClick(this.closeButton, this.exitButton, this.prevButton, this.replayButton);
+            this.gameCanvas.subscribeOnClick(
+              this.closeButton,
+              this.exitButton,
+              this.prevButton,
+              this.replayButton,
+            );
           }
-        }
+        },
       });
     }
     if (!this.statisticButton) {
@@ -212,14 +219,13 @@ export class GameScene extends SceneBase {
         width: 55,
         iconUrl: 'imgs/UI/statistic.png',
         clickHandler: () => {
-          console.log('statistic');
           this.dialog.close();
           this.gameCanvas.unsubscribeClick();
           this.state.currentScene = this.state.scenes.statistic.instance;
           this.state.currentScene.subscribeOnClick();
           this.music.subscribe();
           this.state.currentScene.dialog.open('', 500, [this.state.currentScene.exitButton]);
-        }
+        },
       });
     }
   }
@@ -229,7 +235,7 @@ export class GameScene extends SceneBase {
     this.state.scenes.game.currentLevel.enemies = [];
 
     const currentLevel = isDemo ? demoLevels[level] : levels[level];
-    currentLevel.enemies.forEach(entry => {
+    currentLevel.enemies.forEach((entry) => {
       const enemy = this.unitFactory.create(entry.name, Direction.left);
       this.queue.queueEnemy(this.state.scenes.game.currentLevel.enemies, enemy);
       this.state.scenes.game.currentLevel.enemies.push(enemy);
@@ -247,7 +253,7 @@ export class GameScene extends SceneBase {
   addBuffManager() {
     this.buffManager.createButton();
   }
-  
+
   subscribeButtonsClick() {
     this.controlPanel.subscribe();
     this.buffManager.subscribe();
@@ -271,33 +277,33 @@ export class GameScene extends SceneBase {
     this.gameCanvas.unsubscribeClick();
 
     if (winner === 'allies') {
-      const isLastLevel = this.state.scenes.game.currentLevel.levelNumber === this.state.scenes.game.numberOfLevels - 1;
+      const currentLevel = this.state.scenes.game.currentLevel.levelNumber;
+      const lastLevel = this.state.scenes.game.numberOfLevels - 1;
+      const isLastLevel = currentLevel === lastLevel;
       if (isLastLevel) {
         this.exitButton.x = 450;
-        this.dialog.open('Game over. Thanks for playing :)', 260 , [this.exitButton, this.statisticButton]);
+        this.dialog.open('Game over. Thanks for playing :)', 260, [this.exitButton, this.statisticButton]);
         this.gameCanvas.subscribeOnClick(this.exitButton, this.statisticButton);
       } else {
         this.exitButton.x = 450;
-        this.dialog.open('You win!', 495 , [this.nextButton, this.exitButton]);
+        this.dialog.open('You win!', 495, [this.nextButton, this.exitButton]);
         this.gameCanvas.subscribeOnClick(this.nextButton, this.exitButton);
 
-          const bonusMoney = this.state.scenes.game.currentLevel.levelNumber * 3 + 3;
-          this.state.scenes.game.money += bonusMoney;
-          this.state.scenes.game.pastMoney = this.state.scenes.game.money;
+        const bonusMoney = (this.state.scenes.game.currentLevel.levelNumber * 3) + 3;
+        this.state.scenes.game.money += bonusMoney;
+        this.state.scenes.game.pastMoney = this.state.scenes.game.money;
       }
+    } else if (winner === 'enemies' && this.state.scenes.game.currentLevel.levelNumber) {
+      this.exitButton.x = 400;
+      this.prevButton.x = 550;
+      this.replayButton.x = 700;
+      this.gameCanvas.subscribeOnClick(this.exitButton, this.prevButton, this.replayButton);
+      this.dialog.open('You loose :( Try again!', 370, [this.exitButton, this.prevButton, this.replayButton]);
     } else {
-      if (this.state.scenes.game.currentLevel.levelNumber) {
-        this.exitButton.x = 400;
-        this.prevButton.x = 550;
-        this.replayButton.x = 700;
-        this.gameCanvas.subscribeOnClick(this.exitButton, this.prevButton, this.replayButton);
-        this.dialog.open('You loose :( Try again!', 370 , [this.exitButton, this.prevButton, this.replayButton]);
-      } else {
-        this.exitButton.x = 450;
-        this.replayButton.x = 650;
-        this.gameCanvas.subscribeOnClick(this.exitButton, this.replayButton);
-        this.dialog.open('You loose :( Try again!', 370 , [this.exitButton, this.replayButton]);
-      }
+      this.exitButton.x = 450;
+      this.replayButton.x = 650;
+      this.gameCanvas.subscribeOnClick(this.exitButton, this.replayButton);
+      this.dialog.open('You loose :( Try again!', 370, [this.exitButton, this.replayButton]);
     }
   }
 }

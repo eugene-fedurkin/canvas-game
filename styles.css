@@ -1,6 +1,12 @@
-canvas {
-    display: block;
-    margin: 0 auto;
+body {
+    background: url('./imgs/backgrounds/outside.png');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+canvas.hover {
+    cursor: url(imgs/UI/cursor.png), auto;
 }
 
 @font-face {

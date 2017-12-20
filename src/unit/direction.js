@@ -1,6 +1,6 @@
 const Direction = {
   left: 'left',
-  right: 'right'
+  right: 'right',
 };
 
 export default Direction;

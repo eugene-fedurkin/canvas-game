@@ -3,7 +3,7 @@ const Actions = {
   step: 'step',
   attack: 'attack',
   die: 'die',
-  heal: 'heal'
+  heal: 'heal',
 };
 
 export default Actions;
