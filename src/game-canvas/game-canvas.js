@@ -10,7 +10,6 @@ export default class GameCanvas {
 
     this.cursor = new Image();
     this.cursor.src = 'imgs/UI/cursor.png';
-    // this.img = 'url("imgs/UI/cursor.png"), auto';
 
     this.clickSubscribers = [];
 
