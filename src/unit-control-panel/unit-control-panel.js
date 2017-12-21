@@ -5,7 +5,7 @@ import UnitFactory from '../unit-factory/unit-factory';
 import Queue from '../queue/queue';
 import Direction from '../unit/direction';
 
-export default class ControlPanel {
+export default class UnitControlPanel {
   constructor(state, gameCanvas) {
     this.buttons = null;
     this.state = state;

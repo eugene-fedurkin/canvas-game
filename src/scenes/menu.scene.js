@@ -99,7 +99,7 @@ export default class MenuScene extends SceneBase {
   startGame() {
     this.gameCanvas.unsubscribeClick();
     this.state.currentScene = this.state.scenes.game.instance;
-    this.state.reset(); // TODO: mb rename resetMoney
+    this.state.reset();
     this.state.scenes.game.isDemo = false;
     this.state.currentScene.initialize(0);
     this.state.currentScene.subscribeButtonsClick();

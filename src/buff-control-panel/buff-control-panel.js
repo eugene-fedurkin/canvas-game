@@ -1,6 +1,6 @@
 import Button from '../controls/button';
 
-export default class BuffManager {
+export default class BuffControlPanel {
   constructor(state, gameCanvas) {
     this.buttons = null;
     this.state = state;

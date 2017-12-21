@@ -1,5 +1,5 @@
 import SceneBase from './scene.base';
-import ControlPanel from '../control-panel/control-panel';
+import UnitControlPanel from '../unit-control-panel/unit-control-panel';
 import Dialog from '../dialog/dialog';
 import UnitFactory from '../unit-factory/unit-factory';
 import Queue from '../queue/queue';
@@ -8,14 +8,14 @@ import demoLevels from '../levels/demoLevels';
 import Direction from '../unit/direction';
 import Button from '../controls/button';
 import FloatingText from '../floating-text/floating-text';
-import BuffManager from '../buff-manager/buff-manager';
+import BuffControlPanel from '../buff-control-panel/buff-control-panel';
 
 export default class GameScene extends SceneBase {
   constructor(state, gameCanvas, music) {
     super(state, gameCanvas, music);
 
-    this.controlPanel = new ControlPanel(state, gameCanvas);
-    this.buffManager = new BuffManager(state, gameCanvas);
+    this.unitControlPanel = new UnitControlPanel(state, gameCanvas);
+    this.buffControlPanel = new BuffControlPanel(state, gameCanvas);
     this.floatingText = FloatingText.getSingletonInstance(gameCanvas.context);
     this.dialog = new Dialog(gameCanvas.context);
     this.unitFactory = UnitFactory.getSingletonInstance();
@@ -34,7 +34,7 @@ export default class GameScene extends SceneBase {
       this.showEndGameWindow(winner);
     }
 
-    this.buffManager.updateTime();
+    this.buffControlPanel.updateTime();
 
     this.floatingText.updatePosition();
   }
@@ -43,9 +43,9 @@ export default class GameScene extends SceneBase {
     const gameState = this.state.scenes.game;
 
     this.gameCanvas.context.drawImage(gameState.currentLevel.background, 0, 0);
-    this.controlPanel.buttons.forEach(button => button.render(this.gameCanvas.context));
+    this.unitControlPanel.buttons.forEach(button => button.render(this.gameCanvas.context));
 
-    this.buffManager.render();
+    this.buffControlPanel.render();
 
     gameState.currentLevel.allies.forEach((ally) => {
       const sprite = ally.getCurrentSprite();
@@ -93,7 +93,7 @@ export default class GameScene extends SceneBase {
     state.numberOfLevels = isDemo ? demoLevels.length : levels.length;
 
     this.loadLevel(level, isDemo);
-    this.controlPanel.createControlPanel(level, isDemo);
+    this.unitControlPanel.createControlPanel(level, isDemo);
     this.addBuffManager();
 
     if (!this.nextButton) {
@@ -105,7 +105,7 @@ export default class GameScene extends SceneBase {
         iconUrl: 'imgs/UI/next-button.png',
         clickHandler: () => {
           this.dialog.close();
-          this.buffManager.fullReset();
+          this.buffControlPanel.fullReset();
           this.gameCanvas.unsubscribeClick();
           this.initialize(state.currentLevel.levelNumber + 1, isDemo);
           this.subscribeButtonsClick();
@@ -122,7 +122,7 @@ export default class GameScene extends SceneBase {
         iconUrl: 'imgs/UI/prev-button.png',
         clickHandler: () => {
           this.dialog.close();
-          this.buffManager.fullReset();
+          this.buffControlPanel.fullReset();
           this.gameCanvas.unsubscribeClick();
           this.initialize(state.currentLevel.levelNumber - 1, isDemo);
           this.subscribeButtonsClick();
@@ -140,7 +140,7 @@ export default class GameScene extends SceneBase {
         iconUrl: 'imgs/UI/replay.png',
         clickHandler: () => {
           this.dialog.close();
-          this.buffManager.fullReset();
+          this.buffControlPanel.fullReset();
           this.gameCanvas.unsubscribeClick();
           this.initialize(state.currentLevel.levelNumber, isDemo);
           this.subscribeButtonsClick();
@@ -158,7 +158,7 @@ export default class GameScene extends SceneBase {
         iconUrl: 'imgs/UI/exit.png',
         clickHandler: () => {
           this.dialog.reset();
-          this.buffManager.fullReset();
+          this.buffControlPanel.fullReset();
           this.gameCanvas.unsubscribeClick();
           this.state.currentScene = this.state.scenes.menu.instance;
           this.music.subscribe();
@@ -251,12 +251,12 @@ export default class GameScene extends SceneBase {
   }
 
   addBuffManager() {
-    this.buffManager.createButton();
+    this.buffControlPanel.createButton();
   }
 
   subscribeButtonsClick() {
-    this.controlPanel.subscribe();
-    this.buffManager.subscribe();
+    this.unitControlPanel.subscribe();
+    this.buffControlPanel.subscribe();
     this.music.subscribe();
     this.gameCanvas.subscribeOnClick(this.pauseMenuButton);
   }
